@@ -1,0 +1,120 @@
+\documentclass[12pt]{exam}
+\usepackage{amsthm}
+\usepackage{libertine}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{multicol}
+\usepackage[shortlabels]{enumitem}
+\usepackage{siunitx}
+\usepackage{cancel}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{color, colortbl}
+\usepackage{amsbsy}
+
+
+
+\pgfplotsset{width=10cm,compat=1.9}
+\usepgfplotslibrary{external}
+\tikzexternalize
+
+\newcommand{\class}{PHY410: Computational Physics } % This is the name of the course 
+\newcommand{\examnum}{Assignment 1: Write Up} % This is the name of the assignment
+\newcommand{\examdate}{\today} % This is the due date
+\newcommand{\timelimit}{}
+
+
+
+
+
+\begin{document}
+\pagestyle{plain}
+\thispagestyle{empty}
+
+\noindent
+\begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} r @{\extracolsep{6pt}} l}
+\textbf{\class} & \textbf{Name:} & \textit{Denzel Ayala}\\ %Your name here instead, obviously 
+\textbf{\examnum} &&\\
+\textbf{\examdate} &&\\
+\end{tabular*}\\
+\rule[2ex]{\textwidth}{2pt}
+% ---
+
+
+
+
+    \begin{enumerate} %You can make lists!
+
+        \item For positive numbers the two's complement is the binary representation of that number. For negative numbers you flip every bit in the binary and add 1 to the flipped binary. My answers have been tabulated below.
+            \definecolor{Gray}{gray}{0.85}
+            \begin{center}
+                \begin{tabular}{ |c|c|c| } 
+                    \hline
+                                    Decimal Number & Binary & Two's complement \\
+                    \hline
+                            10    & 0000 0000 1010 & 0000 0000 1010 \\
+                        \rowcolor{Gray}         
+                            436   & 0001 1011 0100 & 0001 1011 0100 \\
+                            1024  & 0100 0000 0000 & 0100 0000 0000 \\
+                        \rowcolor{Gray}
+                        -13   & 0000 0000 1101 & 1111 1111 0011 \\
+                        -1023 & 0011 1111 1111 & 1100 0000 0001 \\
+                        \rowcolor{Gray}
+                        -1024 & 0100 0000 0000 & 1100 0000 0000 \\
+                    \hline
+                \end{tabular}
+            \end{center}
+
+        \item We are given the series $f_n = f_{n-1}^{2}$ where $f_0 = 2$. Using this I calculated and tabulated the first six values of the series.
+
+        \begin{center}
+            \begin{tabular}{ |c|c| }
+                \hline
+                    n & $f_n$ \\
+                \hline
+                    0   & 2 \\
+                    \rowcolor{Gray}         
+                    1   & 4 \\
+                    2   & 16 \\
+                    \rowcolor{Gray}
+                    3   & 256 \\
+                    4   & 65,536 \\
+                    \rowcolor{Gray}
+                    5   & 4,294,967,296 \\
+                    6   & $\sim$ 1.84E19\\
+                \hline
+            \end{tabular}
+        \end{center}
+
+        
+        \begin{gather*}
+            n \: \text{bits} = \left(x \: \text{bytes}\right) \left(y \: \frac{\text{bits}}{\text{byte}}\right) \\
+            \text{MAX\_RANGE} = 2^{n}
+        \end{gather*}
+
+        
+        The architecture provided in problem 2 makes it such that 1-byte is 4-bits. From this we can find the max range of values that can be stored by a given data type, see equations above. For unsigned integers the largest number that can be represented is $\text{MAX\_RANGE} - 1$. The minus one is there to account for needing a bit-configuration to store the zero value. The max signed number is defined by $\frac{\text{MAX\_RANGE}}{2}$. The largest negative number is $\frac{\text{MAX\_RANGE}}{2} - 1$ as you still need a configuration for zero.
+
+        Using this information I have tabulated the max and min values for signed and unsigned ints and longs. Given the information in both tables, the max n a signed int can store is $n=3$. Meanwhile, the signed and unsigned long max out at the 4th value ($n=4$) in the series.
+
+        \begin{center}
+            \begin{tabular}{ |c|c|c|c| }
+                \hline
+                                Data Type & Max Unsigned & Max Signed & Min Signed \\
+                \hline
+                        Int    &     65,535     & +32,768   & -32,767 \\    
+                \hline    
+                        Long   & 4,294,967,295  & +2,147,483,648 & -2,147,483,647 \\
+                \hline
+            \end{tabular}
+        \end{center}
+
+ 
+        
+        \item I did not see what was expected. In problem 2, the architecture was defined as 4-bits per byte, thus the byte size of a data type is the limiting factor in range of values that can be stored. In contrast, C++ has its own standards for data types sizes and ranges. There is a defined minimum range that an int MUST cover, but no defined maximum range. This means that the largest value an int can store is dependent on the compiler and the architecture of your system. An additional factor, is C++ has default bit size for int's and longs. Problem 2's architecture does not align with C++'s default standards for minimum range or bit size. Due to these factors, the max n computed and predicted from problem 2 do not match. In all cases the computed max n was larger.
+
+    \end{enumerate}
+\end{document}
