@@ -29,7 +29,7 @@
         }
         double Line::calcIntercept(const Point& p1, const Point& p2) const {
                 
-                if(p1.x() == p2.x()){ return sqrt(-2);}
+                if(p1.x() == p2.x()){ return -sqrt(-2);}
                 
                 double m = Line::calcSlope(p1, p2);
                 double intercept = p1.y()- m*p1.x();
@@ -50,5 +50,13 @@
         }
 
         void Line::print() const {
-            std::cout << "y = " << m_ << "x + " << b_ << std::endl;
+            std::cout << "y = " << m_ << " x + " << b_ << std::endl;
         }
+
+    /*
+    //operator
+        Line Line::operator=(Line const & right) const{
+            Line retLine(right);
+            return retLine;
+        }
+    */

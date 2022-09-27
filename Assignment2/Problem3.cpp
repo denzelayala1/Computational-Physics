@@ -4,14 +4,18 @@
 #include <algorithm>
 #include <functional>
 #include"Line.h"
+#include <typeinfo>
 
 
 // Pass a pointer to a vector of points to a function to print them all
-void print_all_lines( std::vector<Line> * vec ) {
+void print_all_lines( std::vector<Line> &vec ) {
 
   std::cout << "Lines made from Points are:" << std::endl;
-  for ( unsigned int i = 0; i < vec->size(); ++i ) {
-    (*vec)[i].print();
+  for ( unsigned int i = 0; i < vec.size(); ++i ) {
+    std::printf("Line %u: \t",i+1);
+    vec[i].print();
+    std::cout<<"slope type: " << typeid(vec[i].m()).name() <<
+              "\tintercept type: "<<typeid(vec[i].b()).name() << "\n\n";
   }
 }
 
@@ -32,42 +36,19 @@ void point_populate(std::ifstream &inFile, std::vector<Point> &p_vector ){
 
 void line_populate(std::vector<Line> &l_vector, std::vector<Point> &p_vector ){
 
-      l_vector.resize(p_vector.size());
-     
+    for ( uint32_t i = 0; i < p_vector.size(); ++i ) {
+      for(uint32_t j = i+1; j < p_vector.size(); ++j){
 
-    for ( unsigned int i = 0; i < p_vector.size(); ++i ) {
-
-        
-        l_vector.push_back
+        Line holder(p_vector[i], p_vector[j]);
+        l_vector.push_back(holder);
+      }
     }
 }
 
-void sort_lines(std::vector<Line> * vec){
-    
-        Line holder;
-        int j;
-
-    for ( unsigned int i = 1; i < vec->size(); ++i ) {
-
-        j = i-1;
-        holder =  Line((*vec)[i]);
-        //holder.setIntercept( (*vec)[i].b() );
-        //holder.setSlope( (*vec)[i].m() );
-
-        while(j >= 0 && (*vec)[j].m() > (*vec)[i].m() ){
-            (*vec)[j+1].setSlope( (*vec)[j].m() );
-            j--;            
-        }
-        
-        (*vec)[j+1] = Line( holder);
-        
-    }
-
-}
 
 int main(int argc, char ** argv) {
 
-  std::ifstream inputfile( "points.txt");
+  std::ifstream inputfile(argv[1]);
   std::vector<Point> p_vector;  
   std::vector<Line> l_vector;
 
@@ -75,8 +56,15 @@ int main(int argc, char ** argv) {
 
   // Now LOOP!
   point_populate(inputfile, p_vector);
+  line_populate(l_vector, p_vector);
 
+  print_all_lines(l_vector);
 
+  std::sort(l_vector.begin(), l_vector.end(), [](const Line& lhs,const Line& rhs){
+    return lhs.b() > rhs.b();
+  });   //TODO figure out why it wont sort infinity
 
+  std::cout << "---------------------------------\nThe sorted lines are:\n";
+  print_all_lines(l_vector);
   return 0;
 }
