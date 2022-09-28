@@ -22,23 +22,31 @@
 
         double Line::calcSlope(const Point& p1, const Point& p2) const {
 
-                if(p1.x() == p2.x()){ return std::numeric_limits<double>::infinity();}
+                double tolerance = std::numeric_limits<double>::epsilon();
+
+                if(std::abs(p1.x() - p2.x()) < tolerance ){ return std::numeric_limits<double>::infinity();}
 
                 double slope = (p2.y() - p1.y())/(p2.x() - p1.x());
+
                 return slope; 
         }
         double Line::calcIntercept(const Point& p1, const Point& p2) const {
                 
-                if(p1.x() == p2.x()){ return -sqrt(-2);}
+                double tolerance = std::numeric_limits<double>::epsilon();
+
+                if(std::abs(p1.x() - p2.x()) < tolerance ){ return -sqrt(-2);}
                 
                 double m = Line::calcSlope(p1, p2);
                 double intercept = p1.y()- m*p1.x();
+
                 return intercept;
         }
 
+        //Getters
         double Line::m() const{ return m_;}
         double Line::b() const{ return b_;}
 
+        //Setters
         void Line::setSlope(double im){ m_ = im;}
         void Line::setSlope(const Point& p1, const Point& p2){
                         m_ = calcSlope(p1, p2);
@@ -53,10 +61,3 @@
             std::cout << "y = " << m_ << " x + " << b_ << std::endl;
         }
 
-    /*
-    //operator
-        Line Line::operator=(Line const & right) const{
-            Line retLine(right);
-            return retLine;
-        }
-    */

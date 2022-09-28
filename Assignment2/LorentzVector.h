@@ -62,11 +62,10 @@ class LorentzVector{
     }
     
     void print(){
-        std::cout << "Lorentz Vector: " << "(" <<t_m << ", " <<
-                                                 x_m << ", " <<
-                                                 y_m << ", " <<
-                                                 z_m << ")" << std::endl ; 
-                    // "Invariant Mass: " << *this->mass << std::endl;
+        std::cout << "(" <<t_m << ", " <<
+                            x_m << ", " <<
+                            y_m << ", " <<
+                            z_m << ")" << std::endl ; 
     }
 
 
