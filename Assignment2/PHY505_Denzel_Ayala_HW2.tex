@@ -1,0 +1,67 @@
+\documentclass[12pt]{exam}
+\usepackage{amsthm}
+\usepackage{libertine}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{multicol}
+\usepackage[shortlabels]{enumitem}
+\usepackage{siunitx}
+\usepackage{cancel}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{color, colortbl}
+\usepackage{amsbsy}
+
+\graphicspath{ {./images/} }
+
+\newcommand{\class}{PHY505: Computational Physics } % This is the name of the course 
+\newcommand{\examnum}{Assignment 2: Write Up} % This is the name of the assignment
+\newcommand{\examdate}{\today} % This is the due date
+\newcommand{\timelimit}{}
+
+
+
+
+
+\begin{document}
+\pagestyle{plain}
+\thispagestyle{empty}
+
+\noindent
+\begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} r @{\extracolsep{6pt}} l}
+\textbf{\class} & \textbf{Name:} & \textit{Denzel Ayala}\\ %Your name here instead, obviously 
+\textbf{\examnum} &&\\
+\textbf{\examdate} &&\\
+\end{tabular*}\\
+\rule[2ex]{\textwidth}{2pt}
+% ---
+
+
+
+    \section*{Problem 1}
+    \begin{center}
+        \includegraphics*[scale=0.6]{prob1.png}
+    \end{center}
+
+    I wrote a program that takes an integer command line argument and computes its factorial. There are three distinct cases that were treated. If no input a warning is issued. If a number between $1 \rightarrow 19$ are input its factorial is output. For integers larger than 20 a warning that the number is too large is printed. 
+
+    \section*{Problem2}
+
+    \begin{center}
+        \includegraphics*[scale=0.7]{prob2.png}
+    \end{center}
+
+    In this problem a class template for Lorentz vectors was written in a header file. Three Lorentz vectors were created. The first two were provided by the problem. The final vector was the sum of the other two. From there the invariant mass was calculated. 
+
+    \section*{Problem3}
+    \begin{center}
+        \includegraphics*[scale=0.4]{prob3_part1.png}
+        \includegraphics*[scale=0.4]{prob3_part2.png}
+    \end{center}
+
+    For problem 3 I wrote a Line class. It was designed to create a line from any two points or a given slope and y-intercept. Using the set of given points, a series of every possible line was created and printed to the terminal. These lines were then sorted and reprinted in their sorted order. Special cases treated were cases when the slope was infinite and as a result there would be no y-intercept. For these cases the slope was reported as infinity and the intercept was reported as \textbf{N}ot \textbf{a} \textbf{N}umber or ``\textbf{NaN}''.
+
+\end{document}
