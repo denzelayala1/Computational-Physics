@@ -1,0 +1,20 @@
+! Test battle configuration.
+
+Fordring;defend;Arthas;
+Thrall;heal;Fordring;
+Mograine;attack;Arthas;
+Jaina;attack;Arthas
+
+
+Fordring;defend;Arthas;
+Thrall;heal;Mograine;
+Mograine;attack;Arthas;
+Jaina;attack;Arthas
+
+
+Fordring;defend;Arthas;
+Thrall;heal;Thrall;
+Mograine;attack;Arthas;
+Jaina;attack;Arthas
+
+
